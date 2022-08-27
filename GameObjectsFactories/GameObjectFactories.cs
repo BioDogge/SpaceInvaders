@@ -10,7 +10,7 @@ namespace SpaceInvaders.GameObjectsFactories
     abstract class GameObjectFactories
     {
         public GameSettings GameSettings { get; set; }
-        public abstract GameObject GetGameObject();
+        public abstract GameObject GetGameObject(GameObjectPlace objectPlace);
 
         public GameObjectFactories(GameSettings gameSettings)
         {

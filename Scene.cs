@@ -1,4 +1,5 @@
 ﻿using SpaceInvaders.GameObjects;
+using SpaceInvaders.GameObjectsFactories;
 
 namespace SpaceInvaders
 {
@@ -8,6 +9,7 @@ namespace SpaceInvaders
         private List<GameObject> _ground;
         private GameObject _playerShip;
         private List<GameObject> _playerShipMissile;
+        private GameSettings _gameSettings;
 
         private static Scene _scene;
 
@@ -16,9 +18,12 @@ namespace SpaceInvaders
 
         }
 
-        public Scene(GameSettings gameSettings)
+        private Scene(GameSettings gameSettings)
         {
-
+            _gameSettings = gameSettings;
+            _swarm = new AlienShipFactory(gameSettings).GetSwarm();
+            _ground = new GroundFactory(gameSettings).GetGround();
+            _playerShip = new PlayerShipFactory(gameSettings).GetPlayerShip();
         }
 
         public static Scene GetScene(GameSettings gameSettings)
