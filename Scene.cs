@@ -5,11 +5,11 @@ namespace SpaceInvaders
 {
     internal class Scene
     {
-        private List<GameObject> _swarm;
-        private List<GameObject> _ground;
-        private GameObject _playerShip;
-        private List<GameObject> _playerShipMissile;
         private GameSettings _gameSettings;
+        public List<GameObject> Swarm { get; private set; }
+        public List<GameObject> Ground { get; private set; }
+        public GameObject PlayerShip { get; private set; }
+        public List<GameObject> PlayerShipMissile { get; private set; }
 
         private static Scene _scene;
 
@@ -21,9 +21,9 @@ namespace SpaceInvaders
         private Scene(GameSettings gameSettings)
         {
             _gameSettings = gameSettings;
-            _swarm = new AlienShipFactory(gameSettings).GetSwarm();
-            _ground = new GroundFactory(gameSettings).GetGround();
-            _playerShip = new PlayerShipFactory(gameSettings).GetPlayerShip();
+            Swarm = new AlienShipFactory(gameSettings).GetSwarm();
+            Ground = new GroundFactory(gameSettings).GetGround();
+            PlayerShip = new PlayerShipFactory(gameSettings).GetPlayerShip();
         }
 
         public static Scene GetScene(GameSettings gameSettings)
@@ -32,6 +32,8 @@ namespace SpaceInvaders
             {
                 _scene = new Scene(gameSettings);
             }
+
+            return _scene;
         }
     }
 }
