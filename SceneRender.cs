@@ -82,5 +82,10 @@ namespace SpaceInvaders
                 AddGameObjectForRendering(gameObject);
             }
         }
+
+        public void GameOverRender()
+        {
+            Console.WriteLine("GAME OVER, BITCH!");
+        }
     }
 }

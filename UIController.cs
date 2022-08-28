@@ -10,6 +10,7 @@ namespace SpaceInvaders
     {
         public event EventHandler OnAPressed;
         public event EventHandler OnDPressed;
+        public event EventHandler OnSpacePressed;
 
         public void StartMove()
         {
@@ -21,6 +22,8 @@ namespace SpaceInvaders
                     OnAPressed?.Invoke(this, new EventArgs());
                 else if (keyInfo.Key.Equals(ConsoleKey.D))
                     OnDPressed?.Invoke(this, new EventArgs());
+                else if (keyInfo.Key.Equals(ConsoleKey.Spacebar))
+                    OnSpacePressed?.Invoke(this, new EventArgs());
                 else
                     ;
             }

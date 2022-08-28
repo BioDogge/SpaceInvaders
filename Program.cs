@@ -22,6 +22,7 @@ namespace SpaceInvaders
 
             gameController.OnAPressed += (obj, args) => gameEngine.CalculateMovePlayerShipLeft();
             gameController.OnDPressed += (obj, args) => gameEngine.CalculateMovePlayerShipRight();
+            gameController.OnSpacePressed += (obj, args) => gameEngine.Shoot();
 
             Thread uIThread = new Thread(gameController.StartMove);
             uIThread.Start();

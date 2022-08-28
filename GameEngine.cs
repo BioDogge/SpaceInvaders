@@ -1,4 +1,5 @@
 ﻿using SpaceInvaders.GameObjects;
+using SpaceInvaders.GameObjectsFactories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,7 @@ namespace SpaceInvaders
         public void Run()
         {
             int swarmRenderCouner = 0;
+            int missileRenderCounter = 0;
 
             do
             {
@@ -55,7 +57,17 @@ namespace SpaceInvaders
                 }
                 swarmRenderCouner++;
 
+                if (missileRenderCounter == _gameSettings.PlayerMissileSpeed)
+                {
+                    CalculateMissileMove();
+                    missileRenderCounter = 0;
+                }
+                missileRenderCounter++;
+
             } while (_isNotOver);
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            _sceneRender.GameOverRender();
         }
 
         public void CalculateMovePlayerShipLeft()
@@ -80,6 +92,42 @@ namespace SpaceInvaders
 
                 if (alienShip.GameObjectPlace.YCoordinate == _scene.PlayerShip.GameObjectPlace.YCoordinate)
                     _isNotOver = false;
+            }
+        }
+
+        public void Shoot()
+        {
+            PlayerShipMissileFactory missileFactory = new PlayerShipMissileFactory(_gameSettings);
+            GameObject missile = missileFactory.GetGameObject(_scene.PlayerShip.GameObjectPlace);
+
+            _scene.PlayerShipMissile.Add(missile);
+            Console.Beep(1000, 200);
+        }
+
+        public void CalculateMissileMove()
+        {
+            if (_scene.PlayerShipMissile.Count == 0)
+                return;
+
+            for (int i = 0; i < _scene.PlayerShipMissile.Count; i++)
+            {
+                GameObject missile = _scene.PlayerShipMissile[i];
+
+                if (missile.GameObjectPlace.YCoordinate == 1)
+                    _scene.PlayerShipMissile.RemoveAt(i);
+
+                missile.GameObjectPlace.YCoordinate--;
+                for (int j = 0; j < _scene.Swarm.Count; j++)
+                {
+                    GameObject alienShip = _scene.Swarm[j];
+                    if (missile.GameObjectPlace.Equals(alienShip.GameObjectPlace))
+                    {
+                        _scene.Swarm.RemoveAt(j);
+                        _scene.PlayerShipMissile.RemoveAt(i);
+
+                        break;
+                    }
+                }
             }
         }
     }
