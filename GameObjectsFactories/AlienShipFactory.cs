@@ -34,9 +34,9 @@ namespace SpaceInvaders.GameObjectsFactories
             int startX = GameSettings.SwarmStartXCoordinate;
             int startY = GameSettings.SwarmStartYCoordinate;
 
-            for (int y = 0; y < GameSettings.NumberOfGroundRows; y++)
+            for (int y = 0; y < GameSettings.NumberOfSwarmRows; y++)
             {
-                for (int x = 0; x < GameSettings.NumberOfGroundColls; x++)
+                for (int x = 0; x < GameSettings.NumberOfSwarmColls; x++)
                 {
                     GameObjectPlace objectPlace = new GameObjectPlace()
                     {

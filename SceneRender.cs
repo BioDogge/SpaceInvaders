@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace SpaceInvaders
 {
@@ -15,8 +16,8 @@ namespace SpaceInvaders
 
         public SceneRender(GameSettings gameSettings)
         {
-            _screenWidth = gameSettings.ConsoleWidth + 1;
-            _screenHeight = gameSettings.ConsoleHeight + 1;
+            _screenWidth = gameSettings.ConsoleWidth;
+            _screenHeight = gameSettings.ConsoleHeight;
             _screenMatrix = new char[gameSettings.ConsoleHeight, gameSettings.ConsoleWidth];
 
             Console.WindowHeight = gameSettings.ConsoleHeight;
@@ -49,6 +50,19 @@ namespace SpaceInvaders
             }
 
             Console.WriteLine(stringBuilder.ToString());
+            Console.SetCursorPosition(0, 0);
+        }
+
+        public void ClearScreen()
+        {
+            for (int y = 0; y < _screenHeight; y++)
+            {
+                for (int x = 0; x < _screenWidth; x++)
+                {
+                    _screenMatrix[y, x] = ' ';
+                }
+            }
+
             Console.SetCursorPosition(0, 0);
         }
 

@@ -24,6 +24,7 @@ namespace SpaceInvaders
             Swarm = new AlienShipFactory(gameSettings).GetSwarm();
             Ground = new GroundFactory(gameSettings).GetGround();
             PlayerShip = new PlayerShipFactory(gameSettings).GetPlayerShip();
+            PlayerShipMissile = new List<GameObject>();
         }
 
         public static Scene GetScene(GameSettings gameSettings)

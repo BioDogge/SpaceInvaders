@@ -12,7 +12,7 @@ namespace SpaceInvaders
         public int ConsoleHeight { get; set; } = 30;
 
         public int NumberOfSwarmRows { get; set; } = 2;
-        public int NumberOfSwwarmColls { get; set; } = 60;
+        public int NumberOfSwarmColls { get; set; } = 60;
 
         public int SwarmStartXCoordinate { get; set; } = 10;
         public int SwarmStartYCoordinate { get; set; } = 2;
