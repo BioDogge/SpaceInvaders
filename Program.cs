@@ -6,6 +6,7 @@ namespace SpaceInvaders
     {
         static GameEngine gameEngine;
         static GameSettings gameSettings;
+        static UIController gameController;
 
         static void Main(string[] args)
         {
@@ -17,6 +18,13 @@ namespace SpaceInvaders
         {
             gameSettings = new GameSettings();
             gameEngine = GameEngine.GetGameEngine(gameSettings);
+            gameController = new UIController();
+
+            gameController.OnAPressed += (obj, args) => gameEngine.CalculateMovePlayerShipLeft();
+            gameController.OnDPressed += (obj, args) => gameEngine.CalculateMovePlayerShipRight();
+
+            Thread uIThread = new Thread(gameController.StartMove);
+            uIThread.Start();
         }
     }
 }
